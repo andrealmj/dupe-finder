@@ -58,11 +58,11 @@ app.get('/', (request, response) => {
     //if user is NOT logged in (i.e. loggedin cookie is not defined)
     if ( loggedin === undefined ) {
         //display home page as a user who is NOT logged in (i.e. can SIGN UP / LOG IN)
-        response.render('home');
+        response.render('layouts/defaultLayout');
     } else {
         //else, display home page as a user who is logged in (i.e. can SUBMIT A DUPE / LOG OUT)
         //a LOGGED-IN user can: submit a dupe / submit a review / rate accuracy of a dupe
-        response.render('user/LoggedInUser');
+        response.render('layouts/loggedInLayout');
     }
 
 
@@ -122,7 +122,7 @@ app.get('/', (request, response) => {
                             results.user = request.body.username;
                             console.log(results);
 
-                            response.render('user/LoggedInUser', results);
+                            response.render('layouts/loggedInLayout', results);
                     //     }
                     // });
                 } else {

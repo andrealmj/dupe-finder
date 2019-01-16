@@ -1,11 +1,10 @@
 CREATE TABLE IF NOT EXISTS users (
-    id SERIAL PRIMARY KEY,
-    username TEXT,
+    username TEXT PRIMARY KEY,
     password TEXT
 );
 
 CREATE TABLE IF NOT EXISTS products (
-    id SERIAL PRIMARY KEY,
+    product_id SERIAL PRIMARY KEY,
     brand TEXT,
     shade_name TEXT,
     type TEXT,
@@ -16,8 +15,8 @@ CREATE TABLE IF NOT EXISTS products (
 );
 
 CREATE TABLE IF NOT EXISTS dupes (
-    id SERIAL PRIMARY KEY,
     product_id INTEGER,
     dupe_id INTEGER,
-    similarity INTEGER
+    similarity INTEGER,
+    PRIMARY KEY (product_id, dupe_id)
 );

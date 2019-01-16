@@ -1,5 +1,3 @@
-INSERT INTO users (username, password) VALUES ('andrea', 'andrea');
-
 INSERT INTO products (brand, shade_name, type, price, review_link, product_image_link, product_swatch_link) VALUES ('Becca', 'Champagne Pop', 'Shimmering Skin Perfector Pressed', 38, '#', '#', '#'); --1
 INSERT INTO products (brand, shade_name, type, price, review_link, product_image_link, product_swatch_link) VALUES ('Persona', 'Zuma', 'Cali Glow Highlighter', 24, '#', '#', '#'); --2
 INSERT INTO products (brand, shade_name, type, price, review_link, product_image_link, product_swatch_link) VALUES ('Ofra', 'Glow Goals', 'Highlighter', 29, '#', '#', '#'); --3
@@ -30,6 +28,7 @@ INSERT INTO dupes (product_id, dupe_id, similarity) VALUES (4, 6, 95);
 INSERT INTO dupes (product_id, dupe_id, similarity) VALUES (5, 6, 95);
 INSERT INTO dupes (product_id, dupe_id, similarity) VALUES (4, 7, 94);
 INSERT INTO dupes (product_id, dupe_id, similarity) VALUES (5, 7, 94);
+INSERT INTO dupes (product_id, dupe_id, similarity) VALUES (6, 7, 90);
 INSERT INTO dupes (product_id, dupe_id, similarity) VALUES (8, 9, 95);
 INSERT INTO dupes (product_id, dupe_id, similarity) VALUES (10, 8, 91);
 INSERT INTO dupes (product_id, dupe_id, similarity) VALUES (10, 9, 95);

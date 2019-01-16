@@ -62,7 +62,9 @@ app.get('/', (request, response) => {
     } else {
         //else, display home page as a user who is logged in (i.e. can SUBMIT A DUPE / LOG OUT)
         //a LOGGED-IN user can: submit a dupe / submit a review / rate accuracy of a dupe
-        response.render('layouts/loggedInLayout');
+        var username = request.cookies['username'];
+        console.log("username from existing cookie: ", username);
+        response.render('layouts/loggedInLayout', {username});
     }
 
 
@@ -109,7 +111,7 @@ app.get('/', (request, response) => {
                     let hashedCookie = sha256( user.id + SALT);
                     response.cookie('hashedLoginCookie', hashedCookie);
                     response.cookie('loggedin', 'true');
-                    response.cookie('user_id', user.id);
+                    response.cookie('username', user.username);
 
                     // pool.query('SELECT * FROM tweets', (err, result) => {
                     //     if (err) {
@@ -119,8 +121,8 @@ app.get('/', (request, response) => {
                     //         //since user has logged in successfully, user can now create a tweet on the home page
                             results = {}
                     //         results.tweets = result.rows;
-                            results.user = request.body.username;
-                            console.log(results);
+                            results.username = user.username;
+                            console.log("results", results);
 
                             response.render('layouts/loggedInLayout', results);
                     //     }
@@ -138,7 +140,7 @@ app.get('/', (request, response) => {
         console.log('user has logged out');
         response.clearCookie('hashedLoginCookie');
         response.clearCookie('loggedin');
-        response.clearCookie('user_id');
+        response.clearCookie('username');
         // response.send("You have logged out!");
         response.redirect('/');
     });
@@ -166,15 +168,68 @@ app.post('/users', (request, response) => {
 });
 
 //submit a dupe
-app.get('/dupes/new/', (request, response) => {
+app.get('/dupes/new', (request, response) => {
     //if user is not logged in
     var loggedin = request.cookies['loggedin'];
     if (loggedin === undefined) {
-        response.send('Please log in first to submit a new dupe');
+        response.send("<html><h1>Please log in first to submit a new dupe</h1><br /><button><a href='/'>Home</a></button><button><a href='/login'>Login</a></button></html>");
     } else {
         response.send('Insert form to submit new dupe');
     }
 });
+
+//display search results
+app.post('/search/dupes/results', (request, response) => {
+    const searchInput = `SELECT a.*,
+                        products.brand AS dupe_brand,
+                        products.shade_name AS dupe_shade_name,
+                        products.type AS dupe_type,
+                        products.price AS dupe_price
+                        FROM
+                            (SELECT
+                            products.product_id AS product_id,
+                            products.brand AS product_brand,
+                            products.shade_name AS product_shade_name,
+                            products.type AS product_type,
+                            products.price AS product_price,
+                            dupes.dupe_id
+                            FROM dupes FULL OUTER JOIN products
+                            ON products.product_id = dupes.product_id
+                            WHERE products.shade_name LIKE $1) a
+                            INNER JOIN products
+                        ON products.product_id = a.dupe_id;`
+    let values = ['%' + request.body.search + '%'];
+    console.log("search input: ", values);
+
+    var loggedin = request.cookies['loggedin'];
+    var username = request.cookies['username'];
+    console.log("username from existing cookie after searching for dupe: ", username);
+
+    pool.query(searchInput, values, (error, queryResponse) => {
+        console.log("matches: ", queryResponse.rows);
+        if (queryResponse.rows.length === 0 && loggedin === undefined) {
+            response.render('noMatches');
+        } else if (queryResponse.rows.length !==0 && loggedin === undefined) {
+            response.render('displayMatches', {matches: queryResponse.rows});
+        } else if (queryResponse.rows.length === 0 && loggedin === true) {
+            response.render('noMatchesLoggedIn', {username});
+        } else {
+            infoToDisplay = {}
+            infoToDisplay.matches = queryResponse.rows;
+            infoToDisplay.username = username;
+            console.log("infoToDisplay: ", infoToDisplay);
+
+            response.render('displayMatchesLoggedIn', infoToDisplay);
+        }
+    })
+});
+
+
+
+
+
+
+
 
 //accepts and posts new dupe
 app.post('/dupes/new', (request, response) => {

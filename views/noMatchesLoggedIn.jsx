@@ -20,7 +20,7 @@ class NoMatchesLoggedIn extends React.Component {
 
 
         return (
-                    <LoggedInLayout>
+                    <LoggedInLayout username={this.props.username}>
                     <div>
                         <h2>Sorry, a dupe for '{this.props.product_shade_name}' does not exist in our database.</h2>
                         <ul>{productDetails}</ul>

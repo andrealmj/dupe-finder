@@ -167,17 +167,6 @@ app.post('/users', (request, response) => {
     });
 });
 
-//submit a dupe
-app.get('/dupes/new', (request, response) => {
-    //if user is not logged in
-    var loggedin = request.cookies['loggedin'];
-    if (loggedin === undefined) {
-        response.send("<html><h1>Please log in first to submit a new dupe</h1><br /><button><a href='/'>Home</a></button><button><a href='/login'>Login</a></button></html>");
-    } else {
-        response.send('Insert form to submit new dupe');
-    }
-});
-
 //display search results
 app.post('/search/dupes/results', (request, response) => {
 
@@ -259,7 +248,6 @@ app.post('/search/dupes/results', (request, response) => {
                         noMatchInfoToDisplay.product_details = matchedExistingProducts;
                         noMatchInfoToDisplay.username = username;
 
-
                         response.render('noMatchesLoggedIn', noMatchInfoToDisplay);
                     } else {
                         //what to display if product/dupe match EXISTS
@@ -281,8 +269,6 @@ app.post('/search/dupes/results', (request, response) => {
 
 //display form to CREATE a new product/dupe relationship
 app.get('/dupes/new', (request, response) => {
-    //write logic to insert new dupe data (from form) into dupes database
-
     var loggedin = request.cookies['loggedin'];
 
     if (loggedin === undefined) {
@@ -294,7 +280,9 @@ app.get('/dupes/new', (request, response) => {
 
 //accepts and posts newly-submitted dupe
 app.post('/dupes/new', (request, response) => {
-    response.send("display new pdt/dupe rs here");
+    //write logic to insert new dupe data (from form) into dupes database
+    var username = request.cookies['username'];
+    response.render('displaySubmittedDupe', {username: username})
 })
 
 

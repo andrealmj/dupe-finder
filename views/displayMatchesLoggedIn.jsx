@@ -24,7 +24,7 @@ class DisplayMatchesLoggedIn extends React.Component {
         })
 
         return (
-                    <LoggedInLayout>
+                    <LoggedInLayout username={this.props.username}>
                     <div><ul>{listOfMatches}</ul></div>
                     </LoggedInLayout>
             )

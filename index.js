@@ -119,7 +119,7 @@ app.get('/', (request, response) => {
                     //         response.send('query error');
                     //     } else {
                     //         //since user has logged in successfully, user can now create a tweet on the home page
-                            results = {}
+                            let results = {}
                     //         results.tweets = result.rows;
                             results.username = user.username;
                             console.log("results", results);
@@ -180,7 +180,26 @@ app.get('/dupes/new', (request, response) => {
 
 //display search results
 app.post('/search/dupes/results', (request, response) => {
-    const searchInput = `SELECT a.*,
+
+    //search for existence of product in database
+    const doesProductExist = `SELECT brand, shade_name, type, price FROM products WHERE LOWER (shade_name) LIKE $1`;
+    let values = ['%' + request.body.search.toLowerCase() + '%'];
+
+    pool.query(doesProductExist, values, (error, queryResponse) => {
+
+        if (queryResponse.rows.length === 0) {
+            //product does not exist in database
+            console.log(`searched-for pdt -${request.body.search}- doesnt exist in database`);
+            response.send("this pdt doesnt exist in the database. enable user to submit a pdt if logged in")
+        } else {
+            //product exists in database
+            console.log("matching products that exist in database: ", queryResponse.rows);
+            const matchedExistingProducts = queryResponse.rows;
+            console.log(`since product -${request.body.search}- exists in database, now search for its dupes`);
+            //response.send("product exists in database!");
+
+            //now, search for product's dupes (if any)
+            const searchInput = `SELECT a.*,
                         products.brand AS dupe_brand,
                         products.shade_name AS dupe_shade_name,
                         products.type AS dupe_type,
@@ -195,48 +214,89 @@ app.post('/search/dupes/results', (request, response) => {
                             dupes.dupe_id
                             FROM dupes FULL OUTER JOIN products
                             ON products.product_id = dupes.product_id
-                            WHERE products.shade_name LIKE $1) a
+                            WHERE LOWER (products.shade_name) LIKE $1) a
                             INNER JOIN products
                         ON products.product_id = a.dupe_id;`
-    let values = ['%' + request.body.search + '%'];
-    console.log("search input: ", values);
+            let values = ['%' + request.body.search.toLowerCase() + '%'];
+            //console.log("search input: ", values);
 
-    var loggedin = request.cookies['loggedin'];
-    var username = request.cookies['username'];
-    console.log("username from existing cookie after searching for dupe: ", username);
+            //to check if user is logged in or not
+            var loggedin = request.cookies['loggedin'];
 
-    pool.query(searchInput, values, (error, queryResponse) => {
-        console.log("matches: ", queryResponse.rows);
-        if (queryResponse.rows.length === 0 && loggedin === undefined) {
-            response.render('noMatches');
-        } else if (queryResponse.rows.length !==0 && loggedin === undefined) {
-            response.render('displayMatches', {matches: queryResponse.rows});
-        } else if (queryResponse.rows.length === 0 && loggedin === true) {
-            response.render('noMatchesLoggedIn', {username});
-        } else {
-            infoToDisplay = {}
-            infoToDisplay.matches = queryResponse.rows;
-            infoToDisplay.username = username;
-            console.log("infoToDisplay: ", infoToDisplay);
+            pool.query(searchInput, values, (error, queryResponse) => {
+                console.log("product/dupe match relationships: ", queryResponse.rows);
 
-            response.render('displayMatchesLoggedIn', infoToDisplay);
+                //if user is NOT logged in,
+                if (loggedin === undefined) {
+
+                    //what to display if NO product/dupe match (i.e. product exists but its dupe doesnt)
+                    if (queryResponse.rows.length === 0) {
+                        console.log("no dupe found for this existing product");
+
+                        let noMatchInfoToDisplay = {};
+                        noMatchInfoToDisplay.product_shade_name = request.body.search.toLowerCase();
+                        noMatchInfoToDisplay.product_details = matchedExistingProducts;
+
+
+                        response.render('noMatches', noMatchInfoToDisplay);
+                    } else {
+                        //what to display if product/dupe match EXISTS
+                        response.render('displayMatches', {matches: queryResponse.rows});
+                    }
+
+                } else {
+                    //if user is LOGGED IN
+
+                    //to ensure that, when user is logged in, user's username is showed on the page
+                    var username = request.cookies['username'];
+                    console.log("username from existing cookie after searching for dupe: ", username);
+
+                    //what to display if NO product/dupe match (i.e. product exists but its dupe doesnt)
+                    if (queryResponse.rows.length === 0) {
+
+                        let noMatchInfoToDisplay = {};
+                        noMatchInfoToDisplay.product_shade_name = request.body.search.toLowerCase();
+                        noMatchInfoToDisplay.product_details = matchedExistingProducts;
+                        noMatchInfoToDisplay.username = username;
+
+
+                        response.render('noMatchesLoggedIn', noMatchInfoToDisplay);
+                    } else {
+                        //what to display if product/dupe match EXISTS
+                        let infoToDisplay = {}
+                        infoToDisplay.matches = queryResponse.rows;
+                        infoToDisplay.username = username;
+                        console.log("infoToDisplay: ", infoToDisplay);
+
+                        response.render('displayMatchesLoggedIn', infoToDisplay);
+                    }
+
+                }
+
+            });
         }
-    })
+    });
+
 });
 
-
-
-
-
-
-
-
-//accepts and posts new dupe
-app.post('/dupes/new', (request, response) => {
+//display form to CREATE a new product/dupe relationship
+app.get('/dupes/new', (request, response) => {
     //write logic to insert new dupe data (from form) into dupes database
 
-    response.send('Thanks for your dupe submission! then link to the search query page of tt pdt, which shows the newly-submitted dupe')
+    var loggedin = request.cookies['loggedin'];
+
+    if (loggedin === undefined) {
+        response.render('submitDupe');
+    } else {
+        response.render('submitDupeLoggedIn');
+    };
+});
+
+//accepts and posts newly-submitted dupe
+app.post('/dupes/new', (request, response) => {
+    response.send("display new pdt/dupe rs here");
 })
+
 
 /**
  * ===================================

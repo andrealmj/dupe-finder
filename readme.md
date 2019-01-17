@@ -13,5 +13,9 @@
 for SEARCHING FOR A PRODUCT'S DUPE by SHADE NAME:
 
 1. enter shade name into search bar
-2. if a match between user input & database data is found, display dupe comparison page
-3. if no match found, "Sorry! No known dupes found. Would you like to submit one?"
+
+2. (a) if searched-for pdt exists in database, then check for whether or not it has a dupe.
+2. (b) if searched-for pdt does not exist in database, allow user to submit (create) pdt if logged in.
+
+3. (a)(i) if PRODUCT has DUPE, display comparison between the two.
+3. (a)(ii) if PRODUCT has no DUPE, allow user to submit one if logged in.

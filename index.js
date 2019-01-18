@@ -85,7 +85,6 @@ app.get('/', (request, response) => {
         let query = "SELECT * FROM users WHERE username='"+request.body.username+"'";
 
         pool.query(query, (err, queryResponse) => {
-            console.log( "query response:", queryResponse.rows );
 
             //if the user doesn't exist
             if (queryResponse.rows.length === 0) {
@@ -113,20 +112,11 @@ app.get('/', (request, response) => {
                     response.cookie('loggedin', 'true');
                     response.cookie('username', user.username);
 
-                    // pool.query('SELECT * FROM tweets', (err, result) => {
-                    //     if (err) {
-                    //         console.error('query error: ', err.stack);
-                    //         response.send('query error');
-                    //     } else {
-                    //         //since user has logged in successfully, user can now create a tweet on the home page
-                            let results = {}
-                    //         results.tweets = result.rows;
-                            results.username = user.username;
-                            console.log("results", results);
+                    let results = {}
+                    results.username = user.username;
+                    console.log("results", results);
 
-                            response.render('layouts/loggedInLayout', results);
-                    //     }
-                    // });
+                    response.render('layouts/loggedInLayout', results);
                 } else {
                     //incorrect password
                     console.log("incorrect password");
@@ -149,7 +139,7 @@ app.get('/', (request, response) => {
 //accept newly-registered user data
 app.post('/users', (request, response) => {
 
-    console.log(request.body);
+    console.log("accept newly-registered user data: ", request.body);
 
     let hashedPassword = sha256(request.body.password);
     console.log("hashed password: ", hashedPassword);
@@ -274,15 +264,60 @@ app.get('/dupes/new', (request, response) => {
     if (loggedin === undefined) {
         response.render('submitDupe');
     } else {
-        response.render('submitDupeLoggedIn');
+        var username = request.cookies['username'];
+        response.render('submitDupeLoggedIn', {username: username});
     };
 });
 
-//accepts and posts newly-submitted dupe
+//accepts and posts newly-submitted product/dupe relationship
 app.post('/dupes/new', (request, response) => {
-    //write logic to insert new dupe data (from form) into dupes database
-    var username = request.cookies['username'];
-    response.render('displaySubmittedDupe', {username: username})
+    //write logic to insert new pdt/dupe rs data (from form) into dupes database
+    console.log("Submitted info from submission form: ", request.body)
+
+    //inserting pdt info and dupe info into PRODUCTS table (since dupes are products too)
+    const newSubmission = `INSERT INTO products (brand, shade_name, type, price)
+                            VALUES ($1, $2, $3, $4),
+                                   ($5, $6, $7, $8);`
+    let values = [request.body.submittedDupeBrand,
+                  request.body.submittedDupeShadeName,
+                  request.body.submittedDupeType,
+                  request.body.submittedDupePrice,
+                  request.body.submittedPdtBrand,
+                  request.body.submittedPdtShadeName,
+                  request.body.submittedPdtType,
+                  request.body.submittedPdtPrice,
+    ];
+
+    pool.query(newSubmission, values, (error, result) => {
+        console.log("submitted values pushed into db: ", result.rows);
+
+        //if submitted pdts (the dupe and the pdt) already exist in db, delete the duplicate entries using their own IDs
+
+        //return the IDs of the pdts (the dupe and the pdt) which remained in the db (the OGs, not the duplicates)
+
+            //create the (pdt, dupe) rs tt the user submitted using their IDs
+
+        //else, create new pdt in db
+
+            //create the (pdt, dupe) rs tt the user submitted using their IDs
+
+
+
+
+
+
+
+
+
+        var username = request.cookies['username'];
+        let display = {};
+        display.username = username;
+        display.values = values;
+        response.render('displaySubmittedDupe', display)
+
+
+
+    })
 })
 
 

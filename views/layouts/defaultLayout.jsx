@@ -24,7 +24,7 @@ class DefaultLayout extends React.Component {
                         Log In
                       </a>
 
-                      <form className="dropdown-menu p-4 dropdown-menu-right" action="POST" action="/login">
+                      <form className="dropdown-menu p-4 dropdown-menu-right" method="POST" action="/login">
 
                           <div className="form-group row">
                                 <label htmlFor="username2" className="col-sm-2 col-form-label">Username</label>
@@ -49,7 +49,6 @@ class DefaultLayout extends React.Component {
                       </form>
                     </div>
                 </li>
-
 
 
 

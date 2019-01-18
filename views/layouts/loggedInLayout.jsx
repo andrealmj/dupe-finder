@@ -2,7 +2,6 @@ var React = require("react");
 
 class LoggedInLayout extends React.Component {
   render() {
-        console.log(this.props)
 
     return (
       <html>

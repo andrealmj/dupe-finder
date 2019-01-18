@@ -75,9 +75,9 @@ app.get('/', (request, response) => {
 
 
     //allow user to log in
-    app.get('/login', (request, response) => {
-        response.render('loginPage');
-    });
+    // app.get('/login', (request, response) => {
+    //     response.render('loginPage');
+    // });
 
     app.post('/login',  (request, response) => {
 
@@ -289,7 +289,7 @@ app.post('/dupes/new', (request, response) => {
     ];
 
     pool.query(newSubmission, values, (error, result) => {
-        console.log("submitted values pushed into db: ", result.rows);
+        console.log("submitted values pushed into db: ", result.rows); //why does this give an empty array???
 
         //in PRODUCTS table
         //if submitted pdts (the dupe OR the pdt OR (the dupe AND the pdt)) already exist in db (check by comparing the combination of their FULL shade names AND brand), delete the duplicate entries using their own IDs

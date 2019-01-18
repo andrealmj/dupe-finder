@@ -53,7 +53,6 @@ class DefaultLayout extends React.Component {
 
 
 
-                <li><button type="button" className="btn btn-outline-success"><a href="/login" style={{color: 'green', textDecoration: 'none'}}>Log In</a></button></li>
 
 
 

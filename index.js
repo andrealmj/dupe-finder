@@ -291,15 +291,21 @@ app.post('/dupes/new', (request, response) => {
     pool.query(newSubmission, values, (error, result) => {
         console.log("submitted values pushed into db: ", result.rows);
 
-        //if submitted pdts (the dupe and the pdt) already exist in db, delete the duplicate entries using their own IDs
+        //in PRODUCTS table
+        //if submitted pdts (the dupe OR the pdt OR (the dupe AND the pdt)) already exist in db (check by comparing the combination of their FULL shade names AND brand), delete the duplicate entries using their own IDs
 
         //return the IDs of the pdts (the dupe and the pdt) which remained in the db (the OGs, not the duplicates)
 
-            //create the (pdt, dupe) rs tt the user submitted using their IDs
+            //in DUPES table
+            //create the (pdt, dupe) rs tt the user submitted using their IDs i.e. insert into DUPES table
+
 
         //else, create new pdt in db
 
-            //create the (pdt, dupe) rs tt the user submitted using their IDs
+        //return ID of newly-created pdt
+
+            //in DUPES table
+            //create the (pdt, dupe) rs tt the user submitted using their IDs i.e. insert into DUPES table
 
 
 

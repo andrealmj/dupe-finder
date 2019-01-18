@@ -29,21 +29,7 @@ class DisplaySubmittedDupe extends React.Component {
             <LoggedInLayout username={this.props.username}>
                 <h3>Thanks for your dupe submission!</h3>
 
-                <ul>
-                <li>Product Brand: {this.props.values[4]}</li>
-                <li>Product Shade Name: {this.props.values[5]}</li>
-                <li>Product Type: {this.props.values[6]}</li>
-                <li>Product Price: ${this.props.values[7]}</li>
-                </ul>
-
-                <ul>
-                <li>Dupe Brand: {this.props.values[0]}</li>
-                <li>Dupe Shade Name: {this.props.values[1]}</li>
-                <li>Dupe Type: {this.props.values[2]}</li>
-                <li>Dupe Price: ${this.props.values[3]}</li>
-                </ul>
-
-
+                <p>Your submission is now in the database.</p>
 
             </LoggedInLayout>
 

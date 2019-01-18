@@ -24,7 +24,7 @@ class NoMatches extends React.Component {
                     <div>
                         <h2>Sorry, a dupe for '{this.props.product_shade_name}' does not exist in our database.</h2>
                         <ul>{productDetails}</ul>
-                        <p>Please <a href="/login">log in</a> to <a href="/dupes/new">submit a new dupe</a>.</p>
+                        <p>Please log in to <a href="/dupes/new">submit a new dupe</a>.</p>
                     </div>
                     </DefaultLayout>
             )

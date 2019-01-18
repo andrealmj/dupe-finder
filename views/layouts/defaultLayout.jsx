@@ -24,23 +24,23 @@ class DefaultLayout extends React.Component {
                         Log In
                       </a>
 
-                      <form className="dropdown-menu p-4 dropdown-menu-right" method="POST" action="/login">
+                      <form className="dropdown-menu p-3 dropdown-menu-right" method="POST" action="/login"  style={{width: '400px', maxHeight: '200px'}}>
 
-                          <div className="form-group row">
+                          <div className="form-group row" style={{width: '400px', maxHeight: '200px'}}>
                                 <label htmlFor="username2" className="col-sm-2 col-form-label">Username</label>
-                            <div className="col-sm-10">
-                                <input type="text" name="username" className="form-control" id="username2" />
+                            <div className="col-sm-8 text-center">
+                                <input type="text" name="username" className="form-control" id="username2" style={{maxWidth: '250px'}} />
                             </div>
                           </div>
 
-                          <div className="form-group row">
+                          <div className="form-group row" style={{width: '400px', maxHeight: '200px'}}>
                                 <label htmlFor="exampleDropdownFormPassword2" className="col-sm-2 col-form-label">Password</label>
-                            <div className="col-sm-10">
-                                <input type="password" name="password" className="form-control" id="exampleDropdownFormPassword2" />
+                            <div className="col-sm-8 text-center">
+                                <input type="password" name="password" className="form-control" id="exampleDropdownFormPassword2" style={{maxWidth: '250px'}} />
                             </div>
                           </div>
 
-                          <div className="form-group row">
+                          <div className="form-group row" style={{width: '400px', maxHeight: '200px'}}>
                             <div className="col-sm-10">
                                 <button type="submit" className="btn btn-primary"><a href="/login" style={{color: 'white', textDecoration: 'none'}}>Log in</a></button>
                             </div>
@@ -49,12 +49,6 @@ class DefaultLayout extends React.Component {
                       </form>
                     </div>
                 </li>
-
-
-
-
-
-
 
 
               </ul>

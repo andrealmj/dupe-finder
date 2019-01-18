@@ -8,7 +8,7 @@ class SubmitDupe extends React.Component {
         return (
 
             <DefaultLayout>
-                <h2>Please <a href="/login">log in</a> to submit a dupe.</h2>
+                <h2>Please log in to submit a dupe.</h2>
             </DefaultLayout>
 
             )

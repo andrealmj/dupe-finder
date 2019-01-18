@@ -11,12 +11,12 @@ class SubmitDupeLoggedIn extends React.Component {
 
                 <h2>Submit a dupe:</h2><br />
 
-                <form method="POST" action="">
+                <form method="POST" action="" autocomplete="on">
 
                     <div className="submitted-dupe-info">
                         <h3>Dupe info:</h3>
                         Dupe's shade name: <input name="submittedDupeShadeName" type="text" placeholder="..." style={{width: '50%'}}/><br />
-                        Dupe's brand: <input name="submittedDupeBrand" type="text" placeholder="KIKO, Colorpop, ..." style={{width: '50%'}}/><br />
+                        Dupe's brand: <input name="submittedDupeBrand" type="text" placeholder="KIKO, Colourpop, ..." style={{width: '50%'}}/><br />
                         Dupe's product type: <input name="submittedDupeType" type="text" placeholder="Soft Touch Blush, Ultra Matte Liquid Lipstick, ..." style={{width: '50%'}}/><br />
                         Dupe's price: $<input name="submittedDupePrice" type="text" style={{width: '50%'}}/>
                     </div><br />

@@ -277,7 +277,8 @@ app.post('/dupes/new', (request, response) => {
     //inserting pdt info and dupe info into PRODUCTS table (since dupes are products too)
     const newSubmission = `INSERT INTO products (brand, shade_name, type, price)
                             VALUES ($1, $2, $3, $4),
-                                   ($5, $6, $7, $8);`
+                                   ($5, $6, $7, $8)
+                            RETURNING product_id;`
     let values = [request.body.submittedDupeBrand,
                   request.body.submittedDupeShadeName,
                   request.body.submittedDupeType,
@@ -289,38 +290,28 @@ app.post('/dupes/new', (request, response) => {
     ];
 
     pool.query(newSubmission, values, (error, result) => {
-        console.log("submitted values pushed into db: ", result.rows); //why does this give an empty array???
+        console.log("IDs of products that were just inserted: ", result.rows);
 
-        //in PRODUCTS table
-        //if submitted pdts (the dupe OR the pdt OR (the dupe AND the pdt)) already exist in db (check by comparing the combination of their FULL shade names AND brand), delete the duplicate entries using their own IDs
+        //in DUPES table
 
-        //return the IDs of the pdts (the dupe and the pdt) which remained in the db (the OGs, not the duplicates)
+        //create the (pdt, dupe) rs tt the user submitted using their IDs i.e. insert into DUPES table
+        values = [result.rows[0].product_id,
+                  result.rows[1].product_id,
+                  request.body.similarity,
+        ]
 
-            //in DUPES table
-            //create the (pdt, dupe) rs tt the user submitted using their IDs i.e. insert into DUPES table
+        console.log("value after insert product", values);
+        const createPdtDupeRs = `INSERT INTO dupes (dupe_id, product_id, similarity) VALUES ($1, $2, $3);`
+        pool.query(createPdtDupeRs, values, (error, queryResult) => {
+            console.log("data inserted into dupes table: ", queryResult);
 
-
-        //else, create new pdt in db
-
-        //return ID of newly-created pdt
-
-            //in DUPES table
-            //create the (pdt, dupe) rs tt the user submitted using their IDs i.e. insert into DUPES table
-
-
-
-
-
-
-
-
+        })
 
         var username = request.cookies['username'];
         let display = {};
         display.username = username;
         display.values = values;
         response.render('displaySubmittedDupe', display)
-
 
 
     })

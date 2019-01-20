@@ -206,12 +206,39 @@ app.post('/search/dupes/results', (request, response) => {
 
     pool.query(doesProductExist, values, (error, queryResponse) => {
 
+        //product does not exist in database
         if (queryResponse.rows.length === 0) {
-            //product does not exist in database
             console.log(`searched-for pdt -${request.body.search}- doesnt exist in database`);
-            response.send("this pdt doesnt exist in the database. enable user to submit a pdt if logged in")
-        } else {
-            //product exists in database
+
+            //to check if user is logged in or not
+            var loggedin = request.cookies['loggedin'];
+
+            //if user is not logged in
+            if (loggedin === undefined) {
+
+                response.render('noProduct', {product_shade_name: request.body.search});
+            } else { //if user is logged in
+
+                //to check if user is admin or not
+                var isAdmin = request.cookies['admin'];
+
+                //if user is not admin
+                if (isAdmin === undefined) {
+                    var username = request.cookies['username'];
+
+                    let displayThisInfo = {};
+                    displayThisInfo.product_shade_name = request.body.search;
+                    displayThisInfo.username = username;
+
+                    response.render('noProductLoggedIn', displayThisInfo);
+                } else { //if user is admin
+
+                    response.render('noProductLoggedInAsAdmin', {product_shade_name: request.body.search});
+                }
+
+            }
+
+        } else { //product exists in database
             console.log("matching products that exist in database: ", queryResponse.rows);
             const matchedExistingProducts = queryResponse.rows;
             console.log(`since product -${request.body.search}- exists in database, now search for its dupes`);

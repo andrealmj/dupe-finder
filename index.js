@@ -59,12 +59,19 @@ app.get('/', (request, response) => {
     if ( loggedin === undefined ) {
         //display home page as a user who is NOT logged in (i.e. can SIGN UP / LOG IN)
         response.render('layouts/defaultLayout');
-    } else {
-        //else, display home page as a user who is logged in (i.e. can SUBMIT A DUPE / LOG OUT)
-        //a LOGGED-IN user can: submit a dupe / submit a review / rate accuracy of a dupe
-        var username = request.cookies['username'];
-        console.log("username from existing cookie: ", username);
-        response.render('layouts/loggedInLayout', {username});
+    } else { //user is logged in
+
+        //to check if user is admin
+        var isAdmin = request.cookies['admin'];
+
+        //user is not admin
+        if (isAdmin === undefined) {
+            var username = request.cookies['username'];
+            console.log("username from existing cookie: ", username);
+            response.render('layouts/loggedInLayout', {username});
+        } else { //user is admin
+            response.render('layouts/adminLayout');
+        }
     }
 
 
@@ -91,10 +98,11 @@ app.get('/', (request, response) => {
                 console.log("user doesn't exist");
                 response.send("<html><body><h3>User does not exist!</h3><br /><button><a href='/'>Home</a></button><button><a href='/login'>Back to Login Page</a></button>");
             } else {
-                //if the user exists, check for correct password
+                //if the user exists, check for type of acc (admin or normal user)
                 console.log("user exists");
 
                 const user = queryResponse.rows[0];
+                console.log("user const: ", user);
                 let hashedPassword = user.password;
                 let formHashedPassword = sha256(request.body.password);
 
@@ -102,11 +110,40 @@ app.get('/', (request, response) => {
                 console.log("one from the DB: " + hashedPassword);
                 console.log("and one from the login form: " + formHashedPassword);
 
-                if (formHashedPassword === hashedPassword) {
+                //check if user is an admin (i.e. user = 'andrea')
+                if (user.username === 'andrea') {
+
+                    //check for correct pw
+                    if (formHashedPassword === hashedPassword) {
+
+                    //correct password
+                    console.log('correct password');
+                    console.log('logged in as administrator');
+
+                    //set up hashed cookies (incl admin cookie)
+                    let hashedCookie = sha256( user.id + SALT);
+                    response.cookie('hashedLoginCookie', hashedCookie);
+                    response.cookie('loggedin', 'true');
+                    response.cookie('username', user.username);
+                    response.cookie('admin', 'true');
+
+                    // let results = {}
+                    // results.username = user.username;
+                    // console.log("results", results);
+
+                    response.render('layouts/adminLayout');
+                } else {
+                    //incorrect password
+                    console.log("incorrect password");
+                    response.send("<html><body><h3>Incorrect password!</h3><br /><button><a href='/'>Home</a></button><button><a href='/login'>Back to Login Page</a></button>");
+                }
+            } else { //if not 'andrea', check for correct pw to log normal user in
+                    if (formHashedPassword === hashedPassword) {
+
                     //correct password
                     console.log('correct password');
 
-                    //set up hashed cookie
+                    //set up hashed cookies
                     let hashedCookie = sha256( user.id + SALT);
                     response.cookie('hashedLoginCookie', hashedCookie);
                     response.cookie('loggedin', 'true');
@@ -122,6 +159,8 @@ app.get('/', (request, response) => {
                     console.log("incorrect password");
                     response.send("<html><body><h3>Incorrect password!</h3><br /><button><a href='/'>Home</a></button><button><a href='/login'>Back to Login Page</a></button>");
                 }
+
+                }
             }
         })
     });
@@ -131,6 +170,7 @@ app.get('/', (request, response) => {
         response.clearCookie('hashedLoginCookie');
         response.clearCookie('loggedin');
         response.clearCookie('username');
+        response.clearCookie('admin');
         // response.send("You have logged out!");
         response.redirect('/');
     });
@@ -226,28 +266,61 @@ app.post('/search/dupes/results', (request, response) => {
                 } else {
                     //if user is LOGGED IN
 
+                    //to check if user is admin or not
+                    var isAdmin = request.cookies['admin'];
+
                     //to ensure that, when user is logged in, user's username is showed on the page
                     var username = request.cookies['username'];
                     console.log("username from existing cookie after searching for dupe: ", username);
 
-                    //what to display if NO product/dupe match (i.e. product exists but its dupe doesnt)
-                    if (queryResponse.rows.length === 0) {
+                    //if user is NOT admin,
+                    if (isAdmin === undefined) {
 
-                        let noMatchInfoToDisplay = {};
-                        noMatchInfoToDisplay.product_shade_name = request.body.search.toLowerCase();
-                        noMatchInfoToDisplay.product_details = matchedExistingProducts;
-                        noMatchInfoToDisplay.username = username;
+                        //what to display if NO product/dupe match (i.e. product exists but its dupe doesnt)
+                        if (queryResponse.rows.length === 0) {
 
-                        response.render('noMatchesLoggedIn', noMatchInfoToDisplay);
-                    } else {
-                        //what to display if product/dupe match EXISTS
-                        let infoToDisplay = {}
-                        infoToDisplay.matches = queryResponse.rows;
-                        infoToDisplay.username = username;
-                        console.log("infoToDisplay: ", infoToDisplay);
+                            let noMatchInfoToDisplay = {};
+                            noMatchInfoToDisplay.product_shade_name = request.body.search.toLowerCase();
+                            noMatchInfoToDisplay.product_details = matchedExistingProducts;
+                            noMatchInfoToDisplay.username = username;
 
-                        response.render('displayMatchesLoggedIn', infoToDisplay);
+                            response.render('noMatchesLoggedIn', noMatchInfoToDisplay);
+                        } else {
+                            //what to display if product/dupe match EXISTS
+                            let infoToDisplay = {}
+                            infoToDisplay.matches = queryResponse.rows;
+                            infoToDisplay.username = username;
+                            console.log("infoToDisplay: ", infoToDisplay);
+
+                            response.render('displayMatchesLoggedIn', infoToDisplay);
+                        }
+
+
+
+                    } else { //if user is admin
+
+                        console.log("user is admin");
+
+                        //what to display if NO product/dupe match (i.e. product exists but its dupe doesnt)
+                        if (queryResponse.rows.length === 0) {
+
+                            let noMatchInfoToDisplay = {};
+                            noMatchInfoToDisplay.product_shade_name = request.body.search.toLowerCase();
+                            noMatchInfoToDisplay.product_details = matchedExistingProducts;
+
+                            response.render('noMatchesAsAdmin', noMatchInfoToDisplay);
+                        } else {
+                            //what to display if product/dupe match EXISTS
+                            let infoToDisplay = {}
+                            infoToDisplay.matches = queryResponse.rows;
+                            console.log("infoToDisplay: ", infoToDisplay);
+
+                            response.render('displayMatchesAsAdmin', infoToDisplay);
+                        }
+
                     }
+
+
 
                 }
 
@@ -261,11 +334,23 @@ app.post('/search/dupes/results', (request, response) => {
 app.get('/dupes/new', (request, response) => {
     var loggedin = request.cookies['loggedin'];
 
+    //if user is not logged in
     if (loggedin === undefined) {
         response.render('submitDupe');
-    } else {
-        var username = request.cookies['username'];
-        response.render('submitDupeLoggedIn', {username: username});
+    } else { //if user is logged in
+
+        //to check if user is admin
+        var isAdmin = request.cookies['admin'];
+
+        //if user is not admin
+        if (isAdmin === undefined) {
+            var username = request.cookies['username'];
+            response.render('submitDupeLoggedIn', {username: username});
+
+        } else { //if user is admin
+            response.render('submitDupeAsAdmin');
+        }
+
     };
 });
 
@@ -307,12 +392,25 @@ app.post('/dupes/new', (request, response) => {
 
         })
 
+        //to check if user is admin
+        var isAdmin = request.cookies['admin'];
+
+        //if user is not admin
+        if (isAdmin === undefined) {
+
         var username = request.cookies['username'];
         let display = {};
         display.username = username;
         display.values = values;
-        response.render('displaySubmittedDupe', display)
+        response.render('displaySubmittedDupe', display);
 
+        } else { //if user is admin
+
+        let display = {};
+        display.values = values;
+        response.render('displayAdminSubmittedDupe', display);
+
+        }
 
     })
 })

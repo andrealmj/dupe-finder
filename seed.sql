@@ -19,6 +19,7 @@ INSERT INTO products (brand, shade_name, type, price, review_link, product_image
 INSERT INTO products (brand, shade_name, type, price, review_link, product_image_link, product_swatch_link) VALUES ('Tom Ford Beauty', 'Terra', 'The Ultimate Bronzer', 110, '#', '#', '#'); --19
 INSERT INTO products (brand, shade_name, type, price, review_link, product_image_link, product_swatch_link) VALUES ('NYX', 'Los Angeles', 'Soft Matte Lip Cream', 6.5, '#', '#', '#'); --20
 
+
 INSERT INTO dupes (product_id, dupe_id, similarity) VALUES (1, 2, 97);
 INSERT INTO dupes (product_id, dupe_id, similarity) VALUES (1, 3, 95);
 INSERT INTO dupes (product_id, dupe_id, similarity) VALUES (3, 2, 95);

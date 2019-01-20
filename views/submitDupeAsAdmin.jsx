@@ -1,13 +1,13 @@
 var React = require('react');
-var LoggedInLayout = require('./layouts/loggedInLayout');
+var AdminLayout = require('./layouts/adminLayout');
 
-class SubmitDupeLoggedIn extends React.Component {
+class SubmitDupeAsAdmin extends React.Component {
     render() {
 
 
         return (
 
-            <LoggedInLayout username={this.props.username}>
+            <AdminLayout>
 
                 <h2>Submit a dupe:</h2><br />
 
@@ -43,10 +43,10 @@ class SubmitDupeLoggedIn extends React.Component {
 
                 </form>
 
-            </LoggedInLayout>
+            </AdminLayout>
 
             )
     }
 }
 
-module.exports = SubmitDupeLoggedIn;
+module.exports = SubmitDupeAsAdmin;

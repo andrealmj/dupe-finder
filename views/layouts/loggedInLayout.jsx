@@ -27,7 +27,7 @@ class LoggedInLayout extends React.Component {
           <div className="m-3">
           <h1><a href="/" style={{textDecoration: 'none', color: 'black'}}>Welcome to Dupe Finder, @{this.props.username}!</a></h1>
 
-            <div className="searchbar text-center">
+            <div className="searchbar text-center pb-3">
                 <form className="form-inline my-lg-0" method="POST" action="/search/dupes/results">
                   <input name="search" className="form-control mr-sm-2 input-large search-query" style={{width: '80%'}} type="search" placeholder="Search for dupe by shade name..." aria-label="Search"/>
                   <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>

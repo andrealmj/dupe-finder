@@ -6,19 +6,25 @@ class DisplayMatchesLoggedIn extends React.Component {
 
         const listOfMatches = this.props.matches.map( match => {
             return (
-                <div>
-                    <li>Product Brand: {match.product_brand}</li>
-                    <li>Product Shade Name: {match.product_shade_name}</li>
-                    <li>Product Type: {match.product_type}</li>
-                    <li>Product Price: ${match.product_price}</li>
+                <div className="container">
+                    <div className="row border border-success my-3 py-3">
+                        <div className="col">
+                            <li>Product Brand: {match.product_brand}</li>
+                            <li>Product Shade Name: {match.product_shade_name}</li>
+                            <li>Product Type: {match.product_type}</li>
+                            <li>Product Price: ${match.product_price}</li>
+                        </div>
 
-                    <br />
 
-                    <li>Dupe Brand: {match.dupe_brand}</li>
-                    <li>Dupe Shade Name: {match.dupe_shade_name}</li>
-                    <li>Dupe Type: {match.dupe_type}</li>
-                    <li>Dupe Price: ${match.dupe_price}</li>
-                    <br />
+                        <div className="col">
+                            <li>Dupe Brand: {match.dupe_brand}</li>
+                            <li>Dupe Shade Name: {match.dupe_shade_name}</li>
+                            <li>Dupe Type: {match.dupe_type}</li>
+                            <li>Dupe Price: ${match.dupe_price}</li>
+                        </div>
+
+                    </div>
+
                 </div>
                 )
         })

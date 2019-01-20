@@ -440,8 +440,55 @@ app.post('/dupes/new', (request, response) => {
         }
 
     })
-})
+});
 
+//view all pdt/dupe relationships
+app.get('/view/all', (request, response) => {
+    let showAllRelationships = `SELECT a.*,
+                                products.brand AS dupe_brand,
+                                products.shade_name AS dupe_shade_name,
+                                products.type AS dupe_type,
+                                products.price AS dupe_price
+                                FROM
+                                    (SELECT
+                                    products.product_id AS product_id,
+                                    products.brand AS product_brand,
+                                    products.shade_name AS product_shade_name,
+                                    products.type AS product_type,
+                                    products.price AS product_price,
+                                    dupes.dupe_id
+                                    FROM dupes FULL OUTER JOIN products
+                                    ON products.product_id = dupes.product_id) a
+                                    INNER JOIN products
+                                ON products.product_id = a.dupe_id;`
+
+    pool.query(showAllRelationships, (err, queryResult) => {
+        if (err) {
+            console.error('query error: ', err.stack);
+            response.send('query error');
+        } else {
+            response.render('showAll', {results: queryResult.rows});
+        }
+    });
+});
+
+//display form to edit pdt/dupe rs
+app.get('/dupes/:id/edit', (request, response) => {
+    response.send("display form to edit pdt/dupe rs");
+    response.render('editMatches');
+});
+
+//edit a pdt/dupe rs
+app.put('/dupes/:id', (request, response) => {
+    response.send("edited pdt/dupe rs goes here");
+
+});
+
+//delete a pdt/dupe rs
+app.delete('/dupes/:id', (request, response) => {
+    response.send("deleted a pdt/dupe rs");
+
+});
 
 /**
  * ===================================

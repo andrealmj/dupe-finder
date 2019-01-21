@@ -7,9 +7,11 @@ class ShowAll extends React.Component {
         const listOfResults = this.props.results.map( result => {
             return (
                 <div className="container">
-                    <div className="row border border-success my-3 py-3">
+                    <div className="row border bg-light my-3 py-3">
 
                         <div className="col">
+                            <img src={result.product_swatch_link} style={{maxHeight: '180px'}}/>
+                            <li>Product ID: {result.product_id}</li>
                             <li>Product Brand: {result.product_brand}</li>
                             <li>Product Shade Name: {result.product_shade_name}</li>
                             <li>Product Type: {result.product_type}</li>
@@ -20,6 +22,8 @@ class ShowAll extends React.Component {
 
 
                         <div className="col">
+                            <img src={result.dupe_swatch_link} style={{maxHeight: '180px'}}/>
+                            <li>Dupe ID: {result.dupe_id}</li>
                             <li>Dupe Brand: {result.dupe_brand}</li>
                             <li>Dupe Shade Name: {result.dupe_shade_name}</li>
                             <li>Dupe Type: {result.dupe_type}</li>

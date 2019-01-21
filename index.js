@@ -246,12 +246,14 @@ app.post('/search/dupes/results', (request, response) => {
 
             //now, search for product's dupes (if any)
             const searchInput = `SELECT a.*,
+                        products.product_swatch_link AS dupe_swatch_link,
                         products.brand AS dupe_brand,
                         products.shade_name AS dupe_shade_name,
                         products.type AS dupe_type,
                         products.price AS dupe_price
                         FROM
                             (SELECT
+                            products.product_swatch_link,
                             products.product_id AS product_id,
                             products.brand AS product_brand,
                             products.shade_name AS product_shade_name,
@@ -447,12 +449,14 @@ app.post('/dupes/new', (request, response) => {
 //view all pdt/dupe relationships
 app.get('/view/all', (request, response) => {
     let showAllRelationships = `SELECT a.*,
+                                products.product_swatch_link AS dupe_swatch_link,
                                 products.brand AS dupe_brand,
                                 products.shade_name AS dupe_shade_name,
                                 products.type AS dupe_type,
                                 products.price AS dupe_price
                                 FROM
                                     (SELECT
+                                    products.product_swatch_link,
                                     products.product_id AS product_id,
                                     products.brand AS product_brand,
                                     products.shade_name AS product_shade_name,
@@ -505,12 +509,14 @@ app.delete('/dupes/:id/delete', (request, response) => {
 //display form to edit pdt/dupe rs
 app.get('/dupes/:id/edit', (request, response) => {
     const showDetailsToEdit = `SELECT a.*,
+                                products.product_swatch_link AS dupe_swatch_link,
                                 products.brand AS dupe_brand,
                                 products.shade_name AS dupe_shade_name,
                                 products.type AS dupe_type,
                                 products.price AS dupe_price
                                 FROM
                                     (SELECT
+                                    products.product_swatch_link,
                                     products.product_id AS product_id,
                                     products.brand AS product_brand,
                                     products.shade_name AS product_shade_name,

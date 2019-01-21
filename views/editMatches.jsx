@@ -13,6 +13,7 @@ class EditMatches extends React.Component {
 
                     <div className="row">
                         <div className="col">
+                            <img src={result.product_swatch_link} style={{maxHeight: '180px'}}/>
                             <li>Product Brand: {result.product_brand}</li>
                             <li>Product Shade Name: {result.product_shade_name}</li>
                             <li>Product Type: {result.product_type}</li>
@@ -23,6 +24,7 @@ class EditMatches extends React.Component {
 
 
                         <div className="col">
+                            <img src={result.dupe_swatch_link} style={{maxHeight: '180px'}}/>
                             <li>Dupe Brand: {result.dupe_brand}</li>
                             <li>Dupe Shade Name: {result.dupe_shade_name}</li>
                             <li>Dupe Type: {result.dupe_type}</li>

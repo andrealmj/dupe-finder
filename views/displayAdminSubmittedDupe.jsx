@@ -29,8 +29,6 @@ class DisplayAdminSubmittedDupe extends React.Component {
             <AdminLayout>
 
                 <p>Your submission is now in the database.</p>
-                <p><a href="#">Display all existing product / dupe relationships in database</a></p>
-                <p>(allow edits / delete from that page)</p>
 
             </AdminLayout>
 

@@ -61,7 +61,7 @@ class DefaultLayout extends React.Component {
 
             <div className="searchbar text-center pb-3">
                 <form className="form-inline my-lg-0" method="POST" action="/search/dupes/results">
-                  <input name="search" className="form-control mr-sm-2 input-large search-query" style={{width: '80%'}} type="search" placeholder="Search for dupe by shade name..." aria-label="Search"/>
+                  <input name="search" className="form-control mr-sm-2 input-large search-query" style={{width: '80%'}} type="search" placeholder="Search for dupe by product shade name..." aria-label="Search"/>
                   <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>

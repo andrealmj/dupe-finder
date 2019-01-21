@@ -36,7 +36,6 @@ class AdminLayout extends React.Component {
 
             <h3><a href="/view/all">View all product/dupe relationships</a></h3>
             <h3>add an UPDATE (edit) route</h3>
-            <h3> add a DELETE route</h3>
 
             {this.props.children}
           </div>

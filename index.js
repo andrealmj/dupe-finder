@@ -258,7 +258,8 @@ app.post('/search/dupes/results', (request, response) => {
                             products.type AS product_type,
                             products.price AS product_price,
                             dupes.dupe_id,
-                            dupes.rs_id
+                            dupes.rs_id,
+                            dupes.similarity
                             FROM dupes FULL OUTER JOIN products
                             ON products.product_id = dupes.product_id
                             WHERE LOWER (products.shade_name) LIKE $1) a
@@ -458,7 +459,8 @@ app.get('/view/all', (request, response) => {
                                     products.type AS product_type,
                                     products.price AS product_price,
                                     dupes.dupe_id,
-                                    dupes.rs_id
+                                    dupes.rs_id,
+                                    dupes.similarity
                                     FROM dupes FULL OUTER JOIN products
                                     ON products.product_id = dupes.product_id) a
                                     INNER JOIN products
@@ -502,13 +504,52 @@ app.delete('/dupes/:id/delete', (request, response) => {
 
 //display form to edit pdt/dupe rs
 app.get('/dupes/:id/edit', (request, response) => {
-    response.send("display form to edit pdt/dupe rs");
-    response.render('editMatches');
+    const showDetailsToEdit = `SELECT a.*,
+                                products.brand AS dupe_brand,
+                                products.shade_name AS dupe_shade_name,
+                                products.type AS dupe_type,
+                                products.price AS dupe_price
+                                FROM
+                                    (SELECT
+                                    products.product_id AS product_id,
+                                    products.brand AS product_brand,
+                                    products.shade_name AS product_shade_name,
+                                    products.type AS product_type,
+                                    products.price AS product_price,
+                                    dupes.dupe_id,
+                                    dupes.rs_id,
+                                    dupes.similarity
+                                    FROM dupes FULL OUTER JOIN products
+                                    ON products.product_id = dupes.product_id
+                                    WHERE dupes.rs_id = $1) a
+                                    INNER JOIN products
+                                ON products.product_id = a.dupe_id;`
+    values = [request.params.id];
+    pool.query(showDetailsToEdit, values, (err, queryResult) => {
+        if (err) {
+            console.error('query error: ', err.stack);
+            response.send('query error');
+        } else {
+            console.log("full details from rs that is to be edited: ", queryResult.rows);
+            response.render('editMatches', {results: queryResult.rows});
+        }
+    })
 });
 
-//edit a pdt/dupe rs
-app.put('/dupes/:id', (request, response) => {
-    response.send("edited pdt/dupe rs goes here");
+//submitted edited pdt/dupe rs details
+app.put('/dupes/:id/put', (request, response) => {
+    const updateRs = `UPDATE dupes SET product_id = $1, dupe_id = $2, similarity = $3 WHERE rs_id = $4`;
+    let values = [request.body.pdtId, request.body.dupeId, request.body.similarity, request.params.id];
+
+    pool.query(updateRs, values, (err, result) => {
+        if (err) {
+            console.error('query error: ', err.stack);
+            response.send('query error');
+        } else {
+            console.log(`successfully edited pdt / dupe rs no. ${request.params.id}`);
+        }
+        response.redirect('/view/all');
+    });
 
 });
 

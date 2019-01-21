@@ -18,5 +18,6 @@ CREATE TABLE IF NOT EXISTS dupes (
     product_id INTEGER,
     dupe_id INTEGER,
     similarity INTEGER,
-    PRIMARY KEY (product_id, dupe_id)
+    PRIMARY KEY (product_id, dupe_id),
+    rs_id SERIAL
 );

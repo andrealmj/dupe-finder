@@ -24,11 +24,39 @@ class DisplayMatchesAsAdmin extends React.Component {
                         </div>
 
                         <div className="col">
+                            <p>RS id: {match.rs_id}</p>
+
                             <button type="button" class="btn btn-outline-primary mb-1">Edit</button> <br />
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                            Launch demo modal
+                            Edit MODAL
                             </button>
-                            <button type="button" class="btn btn-outline-danger">Delete</button>
+
+
+
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Edit product / dupe relationship</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    INSERT EDIT FORM HERE
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+
+
+
+                            <button type="button" class="btn btn-danger delete-rs"><a href="/delete/dupes/:id">Delete</a></button>
                         </div>
 
                     </div>

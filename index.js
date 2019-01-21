@@ -257,7 +257,8 @@ app.post('/search/dupes/results', (request, response) => {
                             products.shade_name AS product_shade_name,
                             products.type AS product_type,
                             products.price AS product_price,
-                            dupes.dupe_id
+                            dupes.dupe_id,
+                            dupes.rs_id
                             FROM dupes FULL OUTER JOIN products
                             ON products.product_id = dupes.product_id
                             WHERE LOWER (products.shade_name) LIKE $1) a
@@ -456,7 +457,8 @@ app.get('/view/all', (request, response) => {
                                     products.shade_name AS product_shade_name,
                                     products.type AS product_type,
                                     products.price AS product_price,
-                                    dupes.dupe_id
+                                    dupes.dupe_id,
+                                    dupes.rs_id
                                     FROM dupes FULL OUTER JOIN products
                                     ON products.product_id = dupes.product_id) a
                                     INNER JOIN products
@@ -472,6 +474,32 @@ app.get('/view/all', (request, response) => {
     });
 });
 
+//get a pdt/dupe rs
+app.get('/dupes/:id', (request, response) => {
+    pool.query(`SELECT * FROM dupes WHERE rs_id = $1`, [request.params.id], (err, queryResult) => {
+        if (err) {
+            console.error('query error: ', err.stack);
+            response.send('query error');
+        } else {
+            console.log(queryResult.rows);
+            response.send(queryResult.rows);
+        }
+    });
+});
+
+//delete a pdt/dupe rs
+app.delete('/dupes/:id/delete', (request, response) => {
+    pool.query(`DELETE FROM dupes WHERE rs_id = $1`, [request.params.id], (err, queryResult) => {
+        if (err) {
+            console.error('query error: ', err.stack);
+            response.send('query error');
+        } else {
+            console.log(`Deleted dupe rs id: ${request.params.id} successfully`);
+            response.redirect('/view/all');
+        }
+    });
+});
+
 //display form to edit pdt/dupe rs
 app.get('/dupes/:id/edit', (request, response) => {
     response.send("display form to edit pdt/dupe rs");
@@ -481,12 +509,6 @@ app.get('/dupes/:id/edit', (request, response) => {
 //edit a pdt/dupe rs
 app.put('/dupes/:id', (request, response) => {
     response.send("edited pdt/dupe rs goes here");
-
-});
-
-//delete a pdt/dupe rs
-app.delete('/dupes/:id', (request, response) => {
-    response.send("deleted a pdt/dupe rs");
 
 });
 

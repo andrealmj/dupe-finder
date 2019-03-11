@@ -48,7 +48,7 @@ class DefaultLayout extends React.Component {
 
                           <div className="form-group row" style={{width: '440px', maxHeight: '200px'}}>
                             <div className="col-sm-10">
-                                <button type="submit" className="btn btn-primary" style={{float: 'right'}}><a href="/login" style={{color: 'white', textDecoration: 'none'}}>Log in</a></button>
+                                <button type="submit" className="btn" style={{float: 'right', backgroundColor: '#ddb3b3'}}><a href="/login" style={{color: 'white', textDecoration: 'none'}}>Log in</a></button>
                             </div>
                           </div>
 
@@ -80,9 +80,9 @@ class DefaultLayout extends React.Component {
             {this.props.children}
           </div>
 
-          <div class="navbar fixed-bottom bg-white border">
-            <span style={{fontSize: '16px', float: 'left'}}>Like what you see? Hire me!</span>
-            <span class="float-right"><a href="https://github.com/andrealmj" target="_blank" style={{color: 'black'}}>GitHub</a> | <a href="https://www.linkedin.com/in/andrea-mj-lim/" target="_blank"  style={{color: 'black'}}>LinkedIn</a> | <a href="mailto: andrea.mj.lim@gmail.com?Subject=Andrea, we want to hire you!" style={{color: 'black'}}>E-Mail</a></span>
+          <div class="navbar fixed-bottom" style={{ backgroundColor: '#ddb3b3' }}>
+            <span style={{fontSize: '16px', float: 'left', color: 'white'}}>Like what you see? Hire me!</span>
+            <span class="float-right" style={{color: 'white'}}><a href="https://github.com/andrealmj" target="_blank" style={{color: 'white'}}>GitHub</a> | <a href="https://www.linkedin.com/in/andrea-mj-lim/" target="_blank"  style={{color: 'white'}}>LinkedIn</a> | <a href="mailto: andrea.mj.lim@gmail.com?Subject=Andrea, we want to hire you!" style={{color: 'white'}}>E-Mail</a></span>
           </div>
                     
 

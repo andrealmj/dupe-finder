@@ -135,7 +135,7 @@ app.get('/', (request, response) => {
                 } else {
                     //incorrect password
                     console.log("incorrect password");
-                    response.send("<html><body><h3>Incorrect password!</h3><br /><button><a href='/'>Home</a></button><button><a href='/login'>Back to Login Page</a></button>");
+                    response.render('user/IncorrectPassword');
                 }
             } else { //if not 'andrea', check for correct pw to log normal user in
                     if (formHashedPassword === hashedPassword) {
@@ -157,7 +157,7 @@ app.get('/', (request, response) => {
                 } else {
                     //incorrect password
                     console.log("incorrect password");
-                    response.send("<html><body><h3>Incorrect password!</h3><br /><button><a href='/'>Home</a></button><button><a href='/login'>Back to Login Page</a></button>");
+                    response.render('user/IncorrectPassword');
                 }
 
                 }

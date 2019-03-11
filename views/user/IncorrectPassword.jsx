@@ -1,7 +1,7 @@
 var React = require("react");
 var DefaultLayout = require('../layouts/defaultLayout');
 
-class NoSuchUser extends React.Component {
+class IncorrectPassword extends React.Component {
   render() {
     return (
       <html>
@@ -11,8 +11,8 @@ class NoSuchUser extends React.Component {
         <DefaultLayout>
 
             <div className="pb-4">
-                <p className="font-weight-normal" style={{fontSize: "24px"}}>User doesn't exist!</p>
-                <p><a href="/users/new" style={{color: '#ddb3b3'}}>Register</a> an account?</p>
+                <p className="font-weight-normal" style={{fontSize: "24px"}}>Incorrect password!</p>
+                <p>Please try again.</p>
             </div>
             
         </DefaultLayout>
@@ -23,4 +23,4 @@ class NoSuchUser extends React.Component {
   }
 }
 
-module.exports = NoSuchUser;
+module.exports = IncorrectPassword;

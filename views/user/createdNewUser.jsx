@@ -10,7 +10,7 @@ class NewUser extends React.Component {
 
         <DefaultLayout>
 
-            <h3>User created!</h3>
+            <p className="font-weight-normal" style={{fontSize: "24px"}}>User created!</p>
 
         </DefaultLayout>
 

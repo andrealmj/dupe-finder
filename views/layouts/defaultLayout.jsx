@@ -7,6 +7,7 @@ class DefaultLayout extends React.Component {
         <head>
             <title>Dupe Finder</title>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossOrigin="anonymous"/>
+
         </head>
 
         <body className="bg-light">
@@ -31,21 +32,21 @@ class DefaultLayout extends React.Component {
 
                       <form className="dropdown-menu p-3 dropdown-menu-right" method="POST" action="/login"  style={{width: '400px', maxHeight: '200px'}}>
 
-                          <div className="form-group row" style={{width: '400px', maxHeight: '200px'}}>
+                          <div className="form-group row" style={{width: '500px', maxHeight: '200px'}}>
                                 <label htmlFor="username2" className="col-sm-2 col-form-label">Username</label>
                             <div className="col-sm-8 text-center">
                                 <input type="text" name="username" className="form-control" id="username2" style={{maxWidth: '250px'}} />
                             </div>
                           </div>
 
-                          <div className="form-group row" style={{width: '400px', maxHeight: '200px'}}>
+                          <div className="form-group row" style={{width: '500px', maxHeight: '200px'}}>
                                 <label htmlFor="exampleDropdownFormPassword2" className="col-sm-2 col-form-label">Password</label>
                             <div className="col-sm-8 text-center">
-                                <input type="password" name="password" className="form-control" id="exampleDropdownFormPassword2" style={{maxWidth: '250px'}} />
+                                <input type="password" name="password" className="form-control" id="exampleDropdownFormPassword2" style={{maxWidth: '250px', outline: 'none'}} />
                             </div>
                           </div>
 
-                          <div className="form-group row" style={{width: '400px', maxHeight: '200px'}}>
+                          <div className="form-group row" style={{width: '440px', maxHeight: '200px'}}>
                             <div className="col-sm-10">
                                 <button type="submit" className="btn btn-primary" style={{float: 'right'}}><a href="/login" style={{color: 'white', textDecoration: 'none'}}>Log in</a></button>
                             </div>
@@ -62,26 +63,26 @@ class DefaultLayout extends React.Component {
 
 
           <div class="jumbotron bg-white">
-            <h1 class="display-4 text-center">Welcome to Dupe Finder!</h1>
-            <p class="lead text-center">A makeup dupe is a similarly-colored (and often similar in finish) shade compared to the "original shade."<br /> It might be cheaper than the original, better-performing, permanently available, or by a brand more available to you in your area.</p>
+            <h1 class="display-4">Welcome to Dupe Finder!</h1>
+            <p class="lead">A makeup dupe is a similarly-colored (and often similar in finish) shade compared to the "original shade."<br /> It might be cheaper than the original, better-performing, permanently available, or by a brand more available to you in your area.</p>
             
             <hr class="my-4" />
 
-            <div className="searchbar text-center py-3">
+            <div className="searchbar py-3">
               <form className="form-inline my-2 my-lg-0" method="POST" action="/search/dupes/results">
-                <input name="search" className="form-control mx-auto input-large search-query" style={{ width: '40%' }} type="search" placeholder="Search for dupe by product shade name..." aria-label="Search" />
+                <input name="search" className="form-control input-large search-query mr-2" style={{ width: '40%' }} type="search" placeholder="Search for dupe by product shade name..." aria-label="Search" />
                 <button className="btn my-sm-0" type="submit" style={{ backgroundColor: '#ddb3b3', color: 'white' }}>Search</button>
               </form>
             </div>
           </div>
 
-          <div className="m-3 text-center">
+          <div className="m-3 pb-4">
             {this.props.children}
           </div>
 
           <div class="navbar fixed-bottom bg-white border">
             <span style={{fontSize: '16px', float: 'left'}}>Like what you see? Hire me!</span>
-            <span class="float-right">GitHub | LinkedIn | E-Mail</span>
+            <span class="float-right"><a href="https://github.com/andrealmj" target="_blank" style={{color: 'black'}}>GitHub</a> | <a href="https://www.linkedin.com/in/andrea-mj-lim/" target="_blank"  style={{color: 'black'}}>LinkedIn</a> | <a href="mailto: andrea.mj.lim@gmail.com?Subject=Andrea, we want to hire you!" style={{color: 'black'}}>E-Mail</a></span>
           </div>
                     
 

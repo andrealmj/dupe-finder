@@ -9,17 +9,21 @@ class NewUser extends React.Component {
         <body>
 
         <DefaultLayout>
-            <h3>Register as a new user:</h3>
+            <p className="font-weight-normal" style={{fontSize: "24px"}}>Register as a new user</p>
+            <hr />
 
-              <form className="user-form" method="POST" action="/users">
-                <div className="user-attribute">
-                  Username:<input name="username" type="text" />
+            <form className="user-form pb-4" method="POST" action="/users">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input name="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style={{width: '20%'}}/>
                 </div>
-                <div className="user-attribute">
-                  Password:<input name="password" type="password" />
-                </div>
-                <input name="submit" type="submit" />
-              </form>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input name="password" type="password" class="form-control" id="exampleInputPassword1" style={{width: '20%'}}/>
+              </div>
+                  
+              <button type="submit" class="btn" style={{ backgroundColor: '#ddb3b3', color: 'white' }}>Register</button>
+            </form>
 
         </DefaultLayout>
 

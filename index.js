@@ -201,7 +201,7 @@ app.post('/users', (request, response) => {
 app.post('/search/dupes/results', (request, response) => {
 
     //search for existence of product in database
-    const doesProductExist = `SELECT brand, shade_name, type, price FROM products WHERE LOWER (shade_name) LIKE $1`;
+    const doesProductExist = `SELECT product_swatch_link, brand, shade_name, type, price FROM products WHERE LOWER (shade_name) LIKE $1`;
     let values = ['%' + request.body.search.toLowerCase() + '%'];
 
     pool.query(doesProductExist, values, (error, queryResponse) => {

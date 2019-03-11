@@ -8,10 +8,10 @@ class NoMatches extends React.Component {
             return (
 
                 <div>
-                    <li>Product Brand: {detail.brand}</li>
-                    <li>Product Shade Name: {detail.shade_name}</li>
-                    <li>Product Type: {detail.type}</li>
-                    <li>Product Price: ${detail.price}</li>
+                    <b>Product Brand</b>: {detail.brand}<br />
+                    <b>Product Shade Name</b>: {detail.shade_name}<br />
+                    <b>Product Type</b>: {detail.type}<br />
+                    <b>Product Price</b>: ${detail.price}<br />
                 </div>
 
                 )

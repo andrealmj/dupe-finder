@@ -1,4 +1,4 @@
-var React = require("react");
+import React from 'react';
 
 class DefaultLayout extends React.Component {
   render() {
@@ -9,18 +9,23 @@ class DefaultLayout extends React.Component {
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossOrigin="anonymous"/>
         </head>
 
-        <body>
-          <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light p-0">
+        <body className="bg-light">
+          <nav className="navbar sticky-top navbar-expand-lg navbar-light" style={{ backgroundColor: '#ddb3b3' }}>
+              <a class="navbar-brand" href="/" style={{color: "white"}}>
+                <img src="../../logo.png" width="30" height="30" class="d-inline-block align-top" alt="" />
+                Dupe Finder
+              </a>
+
               <div className="collapse navbar-collapse" id="navbarSupportedContent">
 
               <ul className="navbar-nav ml-auto">
 
-                <li><button type="button" className="btn btn-outline-success"><a href="/users/new" style={{color: 'green', textDecoration: 'none'}}>Register</a></button></li>
+                <li><button type="button" className="btn mx-1" style={{backgroundColor: 'white'}}><a href="/users/new" style={{backgroundColor: 'white', color: '#ddb3b3', textDecoration: 'none'}}>Register</a></button></li>
 
 
                 <li>
                     <div className="dropdown">
-                      <a className="btn btn-outline-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <a className="btn dropdown-toggle mx-1" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{backgroundColor: 'white', color: '#ddb3b3'}}>
                         Log In
                       </a>
 
@@ -42,7 +47,7 @@ class DefaultLayout extends React.Component {
 
                           <div className="form-group row" style={{width: '400px', maxHeight: '200px'}}>
                             <div className="col-sm-10">
-                                <button type="submit" className="btn btn-primary"><a href="/login" style={{color: 'white', textDecoration: 'none'}}>Log in</a></button>
+                                <button type="submit" className="btn btn-primary" style={{float: 'right'}}><a href="/login" style={{color: 'white', textDecoration: 'none'}}>Log in</a></button>
                             </div>
                           </div>
 
@@ -56,16 +61,21 @@ class DefaultLayout extends React.Component {
           </nav>
 
 
-          <div className="m-3">
-          <h1><a href="/" style={{textDecoration: 'none', color: 'black'}}>Welcome to Dupe Finder!</a></h1>
+          <div class="jumbotron bg-white">
+            <h1 class="display-4 text-center">Welcome to Dupe Finder!</h1>
+            <p class="lead text-center">A makeup dupe is a similarly-colored (and often similar in finish) shade compared to the "original shade."<br /> It might be cheaper than the original, better-performing, permanently available, or by a brand more available to you in your area.</p>
+            
+            <hr class="my-4" />
 
-            <div className="searchbar text-center pb-3">
-                <form className="form-inline my-lg-0" method="POST" action="/search/dupes/results">
-                  <input name="search" className="form-control mr-sm-2 input-large search-query" style={{width: '80%'}} type="search" placeholder="Search for dupe by product shade name..." aria-label="Search"/>
-                  <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+            <div className="searchbar text-center py-3">
+              <form className="form-inline my-2 my-lg-0" method="POST" action="/search/dupes/results">
+                <input name="search" className="form-control mx-auto input-large search-query" style={{ width: '40%' }} type="search" placeholder="Search for dupe by product shade name..." aria-label="Search" />
+                <button className="btn my-sm-0" type="submit" style={{ backgroundColor: '#ddb3b3', color: 'white' }}>Search</button>
+              </form>
             </div>
+          </div>
 
+          <div className="m-3 text-center">
             {this.props.children}
           </div>
 

@@ -9,10 +9,10 @@ class NoMatchesAsAdmin extends React.Component {
             return (
 
                 <div>
-                    <li>Product Brand: {detail.brand}</li>
-                    <li>Product Shade Name: {detail.shade_name}</li>
-                    <li>Product Type: {detail.type}</li>
-                    <li>Product Price: ${detail.price}</li>
+                    <b>Product Brand</b>: {detail.brand}<br />
+                    <b>Product Shade Name</b>: {detail.shade_name}<br />
+                    <b>Product Type</b>: {detail.type}<br />
+                    <b>Product Price</b>: ${detail.price}<br />
                 </div>
 
                 )
@@ -22,9 +22,9 @@ class NoMatchesAsAdmin extends React.Component {
         return (
                     <AdminLayout>
                     <div>
-                        <h2>Sorry, a dupe for '{this.props.product_shade_name}' does not exist in our database.</h2>
+                        <h2>No dupes for '{this.props.product_shade_name}' exist in the database.</h2>
                         <ul>{productDetails}</ul>
-                        <p>Would you like to <a href="/dupes/new">submit a new dupe</a>?</p>
+                        <p><a href="/dupes/new">Create a new dupe</a></p>
                     </div>
                     </AdminLayout>
             )

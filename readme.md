@@ -1,4 +1,4 @@
-==========USER STORIES===========
+s==========USER STORIES===========
 "As a makeup-lover, I want to be able to find cheaper alternatives to my favourite products so I can SAVE MONEY while still looking good"
 
 =========FUNCTIONALITIES=========

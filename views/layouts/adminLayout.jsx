@@ -10,27 +10,28 @@ class AdminLayout extends React.Component {
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossOrigin="anonymous"/>
         </head>
 
-        <body>
-          <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+        <body className="bg-light">
+          <nav className="navbar sticky-top navbar-expand-lg navbar-light" style={{backgroundColor: '#ddb3b3'}}>
               <div className="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <a className="navbar-brand" style={{color: 'white'}}>Logged in as admin</a>
 
               <ul className="navbar-nav ml-auto">
 
-                <li><button type="button" className="btn btn-outline-success">admin</button></li>
-                <li><button type="button" className="btn btn-outline-success"><a href="/logout" style={{color: 'green', textDecoration: 'none'}}>Log Out</a></button></li>
-                <li><button type="button" className="btn btn-outline-success"><a href="/dupes/new" style={{color: 'green', textDecoration: 'none'}}>Submit A Dupe</a></button></li>
+                <li><button type="button" className="btn mx-1" style={{backgroundColor: 'white'}}><a href="/logout" style={{backgroundColor: 'white', color: '#ddb3b3', textDecoration: 'none'}}>Log Out</a></button></li>
+                <li><button type="button" className="btn mx-1" style={{backgroundColor: 'white'}}><a href="/dupes/new" style={{backgroundColor: 'white', color: '#ddb3b3', textDecoration: 'none'}}>Submit A Dupe</a></button></li>
 
               </ul>
               </div>
           </nav>
 
           <div className="m-3">
-          <h1><a href="/" style={{textDecoration: 'none', color: 'black'}}>You are now logged in as an admin.</a></h1>
+          <h1><a href="/" style={{textDecoration: 'none', color: 'black'}}>Welcome to Dupe Finder!</a></h1>
 
             <div className="searchbar text-center pb-3">
                 <form className="form-inline my-lg-0" method="POST" action="/search/dupes/results">
                   <input name="search" className="form-control mr-sm-2 input-large search-query" style={{width: '80%'}} type="search" placeholder="Search for dupe by product shade name..." aria-label="Search"/>
-                  <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                  <button className="btn my-2 my-sm-0" type="submit" style={{backgroundColor: '#ddb3b3', color: 'white'}}>Search</button>
                 </form>
             </div>
 

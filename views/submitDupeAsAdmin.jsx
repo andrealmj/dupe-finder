@@ -30,13 +30,6 @@ class SubmitDupeAsAdmin extends React.Component {
                     </div><br />
 
                     How similar is the dupe to the original product? <input name="similarity" type="text" />%
-                    <select className="custom-select">
-                      <option selected>Similarity</option>
-                      <option value="1">85%</option>
-                      <option value="2">90%</option>
-                      <option value="3">95%</option>
-                      <option value="4">100%</option>
-                    </select>
 
                     <br />
                     <input name="submit" type="submit" />

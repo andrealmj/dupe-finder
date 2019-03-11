@@ -193,7 +193,7 @@ app.post('/users', (request, response) => {
     pool.query(queryString, values, (error, result) => {
         //response.redirect('/');
         //response.cookie('loggedin', 'true');
-        response.send("<html><body><h3>User created!</h3><br /><button><a href='/'>Home</a></button><button><a href='/login'>Login</a></button>")
+        response.render('user/createdNewUser');
     });
 });
 
@@ -446,6 +446,20 @@ app.post('/dupes/new', (request, response) => {
     })
 });
 
+// //view all products
+// app.get('/view/all/products', (request, response) => {
+//     let showAllProducts = `SELECT product_id, brand, shade_name, type, price, product_image_link FROM products;`
+
+//     pool.query(showAllProducts, (err, queryResult) => {
+//         if (err) {
+//             console.error('query error: ', err.stack);
+//             response.send('query error');
+//         } else {
+//             response.render('showAllProducts', {results: queryResult.rows});
+//         }
+//     })
+// });
+
 //view all pdt/dupe relationships
 app.get('/view/all', (request, response) => {
     let showAllRelationships = `SELECT a.*,
@@ -558,6 +572,88 @@ app.put('/dupes/:id/put', (request, response) => {
     });
 
 });
+
+
+
+
+// //get a pdt
+// app.get('/products/:id', (request, response) => {
+//     pool.query(`SELECT * FROM products WHERE product_id = $1`, [request.params.id], (err, queryResult) => {
+//         if (err) {
+//             console.error('query error: ', err.stack);
+//             response.send('query error');
+//         } else {
+//             console.log(queryResult.rows);
+//             response.send(queryResult.rows);
+//         }
+//     });
+// });
+
+// //delete a pdt
+// app.delete('/products/:id/delete', (request, response) => {
+//     pool.query(`DELETE FROM products WHERE product_id = $1`, [request.params.id], (err, queryResult) => {
+//         if (err) {
+//             console.error('query error: ', err.stack);
+//             response.send('query error');
+//         } else {
+//             console.log(`Deleted product id: ${request.params.id} successfully`);
+//             response.redirect('/view/all');
+//         }
+//     });
+// });
+
+// //display form to edit pdt/dupe rs
+// app.get('/dupes/:id/edit', (request, response) => {
+//     const showDetailsToEdit = `SELECT a.*,
+//                                 products.product_swatch_link AS dupe_swatch_link,
+//                                 products.brand AS dupe_brand,
+//                                 products.shade_name AS dupe_shade_name,
+//                                 products.type AS dupe_type,
+//                                 products.price AS dupe_price
+//                                 FROM
+//                                     (SELECT
+//                                     products.product_swatch_link,
+//                                     products.product_id AS product_id,
+//                                     products.brand AS product_brand,
+//                                     products.shade_name AS product_shade_name,
+//                                     products.type AS product_type,
+//                                     products.price AS product_price,
+//                                     dupes.dupe_id,
+//                                     dupes.rs_id,
+//                                     dupes.similarity
+//                                     FROM dupes FULL OUTER JOIN products
+//                                     ON products.product_id = dupes.product_id
+//                                     WHERE dupes.rs_id = $1) a
+//                                     INNER JOIN products
+//                                 ON products.product_id = a.dupe_id;`
+//     values = [request.params.id];
+//     pool.query(showDetailsToEdit, values, (err, queryResult) => {
+//         if (err) {
+//             console.error('query error: ', err.stack);
+//             response.send('query error');
+//         } else {
+//             console.log("full details from rs that is to be edited: ", queryResult.rows);
+//             response.render('editMatches', {results: queryResult.rows});
+//         }
+//     })
+// });
+
+// //submitted edited pdt/dupe rs details
+// app.put('/products/:id/put', (request, response) => {
+//     const updateRs = `UPDATE products SET product_id = $1, brand = $2, shade_name = $3, type = $4, price = $5, product_swatch_link = $6 WHERE product_id = $7`;
+//     let values = [request.body.pdtId, request.body.dupeId, request.body.similarity, request.params.id];
+
+//     pool.query(updateRs, values, (err, result) => {
+//         if (err) {
+//             console.error('query error: ', err.stack);
+//             response.send('query error');
+//         } else {
+//             console.log(`successfully edited pdt id no. ${request.params.id}`);
+//         }
+//         response.redirect('/view/all/products');
+//     });
+
+// });
 
 /**
  * ===================================

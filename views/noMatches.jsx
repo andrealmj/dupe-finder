@@ -21,10 +21,10 @@ class NoMatches extends React.Component {
 
         return (
                     <DefaultLayout>
-                    <div>
-                        <h2>Sorry, a dupe for '{this.props.product_shade_name}' does not exist in our database.</h2>
+                    <div className="pb-4">
+                        <p className="font-weight-normal" style={{fontSize: "24px"}}>Sorry, a dupe for '{this.props.product_shade_name}' does not exist in our database.</p>
                         <ul>{productDetails}</ul>
-                        <p>Please log in to <a href="/dupes/new">submit a new dupe</a>.</p>
+                        <p>Please log in to submit a new dupe.</p>
                     </div>
                     </DefaultLayout>
             )

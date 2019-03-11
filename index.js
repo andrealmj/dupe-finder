@@ -96,7 +96,7 @@ app.get('/', (request, response) => {
             //if the user doesn't exist
             if (queryResponse.rows.length === 0) {
                 console.log("user doesn't exist");
-                response.send("<html><body><h3>User does not exist!</h3><br /><button><a href='/'>Home</a></button><button><a href='/login'>Back to Login Page</a></button>");
+                response.render('user/NoSuchUser');
             } else {
                 //if the user exists, check for type of acc (admin or normal user)
                 console.log("user exists");

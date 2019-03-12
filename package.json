@@ -4,7 +4,8 @@
   "description": "==========USER STORIES===========\r \"As a makeup-lover, I want to be able to find cheaper alternatives to my favourite products so I can SAVE MONEY while still looking good\"",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",

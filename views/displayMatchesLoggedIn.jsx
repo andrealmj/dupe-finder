@@ -10,7 +10,7 @@ class DisplayMatchesLoggedIn extends React.Component {
                     <div className="row border bg-light my-3 py-3">
                         <div className="col float-right">
                             <img src={match.product_swatch_link} style={{maxHeight: '180px'}}/><br />
-                            <b>Praoduct Brand</b>: {match.product_brand}<br />
+                            <b>Product Brand</b>: {match.product_brand}<br />
                             <b>Product Shade Name</b>: {match.product_shade_name}<br />
                             <b>Product Type</b>: {match.product_type}<br />
                             <b>Product Price</b>: ${match.product_price}<br />

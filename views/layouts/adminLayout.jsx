@@ -12,9 +12,12 @@ class AdminLayout extends React.Component {
 
         <body className="bg-light">
           <nav className="navbar sticky-top navbar-expand-lg navbar-light" style={{backgroundColor: '#ddb3b3'}}>
+              <a class="navbar-brand" href="/" style={{color: "white"}}>
+                <img src="../../logo.png" width="30" height="30" class="d-inline-block align-top" alt="" />
+                Dupe Finder
+              </a>
+              
               <div className="collapse navbar-collapse" id="navbarSupportedContent">
-
-                <a className="navbar-brand" style={{color: 'white'}}>Logged in as admin</a>
 
               <ul className="navbar-nav ml-auto">
 
@@ -25,19 +28,28 @@ class AdminLayout extends React.Component {
               </div>
           </nav>
 
-          <div className="m-3">
-          <h1><a href="/" style={{textDecoration: 'none', color: 'black'}}>Welcome to Dupe Finder!</a></h1>
+          <div class="jumbotron bg-white">
+            <h1 class="display-4">Welcome to Dupe Finder!<br />You are logged in as an administrator.</h1>
+            <p class="lead">A makeup dupe is a similarly-colored (and often similar in finish) shade compared to the "original shade."<br /> It might be cheaper than the original, better-performing, permanently available, or by a brand more available to you in your area.</p>
+            
+            <hr class="my-4" />
 
-            <div className="searchbar text-center pb-3">
-                <form className="form-inline my-lg-0" method="POST" action="/search/dupes/results">
-                  <input name="search" className="form-control mr-sm-2 input-large search-query" style={{width: '80%'}} type="search" placeholder="Search for dupe by product shade name..." aria-label="Search"/>
-                  <button className="btn my-2 my-sm-0" type="submit" style={{backgroundColor: '#ddb3b3', color: 'white'}}>Search</button>
-                </form>
+            <div className="searchbar py-3">
+              <form className="form-inline my-2 my-lg-0" method="POST" action="/search/dupes/results">
+                <input name="search" className="form-control input-large search-query mr-2" style={{ width: '40%' }} type="search" placeholder="Search for dupe by product shade name..." aria-label="Search" />
+                <button className="btn my-sm-0" type="submit" style={{ backgroundColor: '#ddb3b3', color: 'white' }}>Search</button>
+              </form>
             </div>
+          </div>
 
-            <h3><a href="/view/all">View all product/dupe relationships</a></h3>
-
+          <div className="m-4 pb-4">
+            <p className="font-weight-normal" style={{fontSize: '24px'}}><a href="/view/all" style={{color: '#ddb3b3'}}>View all product/dupe relationships</a></p>
             {this.props.children}
+          </div>
+
+          <div class="navbar fixed-bottom" style={{ backgroundColor: '#ddb3b3' }}>
+            <span style={{fontSize: '16px', float: 'left', color: 'white'}}>Like what you see? Hire me!</span>
+            <span class="float-right" style={{color: 'white'}}><a href="https://github.com/andrealmj" target="_blank" style={{color: 'white'}}>GitHub</a> | <a href="https://www.linkedin.com/in/andrea-mj-lim/" target="_blank"  style={{color: 'white'}}>LinkedIn</a> | <a href="mailto: andrea.mj.lim@gmail.com?Subject=Andrea, we want to hire you!" style={{color: 'white'}}>E-Mail</a></span>
           </div>
 
           <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossOrigin="anonymous"></script>

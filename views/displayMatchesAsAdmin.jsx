@@ -28,7 +28,7 @@ class DisplayMatchesAsAdmin extends React.Component {
                         </div>
 
                         <div className="col">
-                            <b>RS id</b>: {match.rs_id}
+                            <b>RS id</b>: {match.rs_id}<br />
                             <b>Similarity</b>: {match.similarity}%
 
 

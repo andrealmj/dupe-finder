@@ -63,8 +63,8 @@ class DefaultLayout extends React.Component {
 
 
           <div class="jumbotron bg-white">
-            <h1 class="display-4">Welcome to Dupe Finder!</h1>
-            <p class="lead">A makeup dupe is a similarly-colored (and often similar in finish) shade compared to the "original shade."<br /> It might be cheaper than the original, better-performing, permanently available, or by a brand more available to you in your area.</p>
+            <h1 class="font-weight-light">Welcome to Dupe Finder!</h1>
+            <p class="lead" style={{fontSize: '18px'}}>A makeup dupe is a similarly-colored (and often similar in finish) shade compared to the "original shade."<br /> It might be cheaper than the original, better-performing, permanently available, or by a brand more available to you in your area.</p>
             
             <hr class="my-4" />
 

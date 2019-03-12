@@ -7,7 +7,7 @@ class DisplayMatchesLoggedIn extends React.Component {
         const listOfMatches = this.props.matches.map( match => {
             return (
                 <div className="container">
-                    <div className="row border bg-light my-3 py-3">
+                    <div className="row border bg-white shadow p-3 mb-5 rounded my-3 py-3">
                         <div className="col float-right">
                             <img src={match.product_swatch_link} style={{maxHeight: '180px'}}/><br />
                             <b>Product Brand</b>: {match.product_brand}<br />

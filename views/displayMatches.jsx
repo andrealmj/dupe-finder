@@ -9,7 +9,7 @@ class DisplayMatches extends React.Component {
 
             return (
                 <div className="container">
-                    <div className="row border my-3 py-3" style={{backgroundColor: 'white'}}>
+                    <div className="row border bg-white shadow p-3 mb-5 rounded my-3 py-3" style={{backgroundColor: 'white'}}>
 
                         <div className="col float-right">
                             <img src={match.product_swatch_link} style={{maxHeight: '180px'}}/><br />

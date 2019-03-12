@@ -8,7 +8,7 @@ class SubmitDupe extends React.Component {
         return (
 
             <DefaultLayout>
-                <h2>Please log in to submit a dupe.</h2>
+                <p className="font-weight-normal" style={{fontSize: '24px'}}>Please log in to submit a dupe.</p>
             </DefaultLayout>
 
             )

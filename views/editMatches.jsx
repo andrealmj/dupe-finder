@@ -7,9 +7,6 @@ class EditMatches extends React.Component {
         const listOfResults = this.props.results.map( result => {
             return (
                 <div className="container">
-                    <div className="row">
-                        <p>RS id: {result.rs_id}</p>
-                    </div>
 
                     <div className="row">
                         <div className="col">
@@ -34,12 +31,13 @@ class EditMatches extends React.Component {
                         </div>
 
                         <div className="col">
+                        <b>RS id</b>: {result.rs_id}<br />
                         <b>Similarity</b>: {result.similarity}%
                         </div>
 
                     </div>
 
-                <h3>Edit product/dupe relationship:</h3>
+                <p className="font-weight-normal" style={{fontSize: '24px'}}>Edit product/dupe relationship:</p>
                 <form method='POST' action={'/dupes/' + result.rs_id + "/put?_method=PUT"}>
                     Product ID: <input type='text' name='pdtId' placeholder='product ID' defaultValue={result.product_id}/><br />
                     Dupe ID: <input type='text' name='dupeId' placeholder='dupe ID' defaultValue={result.dupe_id}/><br />

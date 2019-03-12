@@ -7,7 +7,7 @@ class DisplayMatchesAsAdmin extends React.Component {
         const listOfMatches = this.props.matches.map( match => {
             return (
                 <div className="container">
-                    <div className="row border bg-light my-3 py-3">
+                    <div className="row border bg-white shadow p-3 mb-5 rounded my-3 py-3">
                         <div className="col">
                             <img src={match.product_swatch_link} style={{maxHeight: '180px'}}/><br />
                             <b>Product ID</b>: {match.product_id}<br />

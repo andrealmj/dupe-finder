@@ -7,7 +7,7 @@ class ShowAll extends React.Component {
         const listOfResults = this.props.results.map( result => {
             return (
                 <div className="container">
-                    <div className="row border bg-light my-3 py-3">
+                    <div className="row border bg-white shadow p-3 mb-5 rounded my-3 py-3">
 
                         <div className="col">
                             <img src={result.product_swatch_link} style={{maxHeight: '180px'}}/><br />
@@ -36,11 +36,11 @@ class ShowAll extends React.Component {
 
 
                             <form method='GET' action={'/dupes/' + result.rs_id + '/edit'}>
-                                <input type='submit' value='Edit'/>
+                                <button type="submit" class="btn btn-outline-light" style={{ backgroundColor: '#ddb3b3', color: 'white' }}>Edit</button>
                             </form>
 
                             <form method="POST" action ={'/dupes/' + result.rs_id + '/delete?_method=DELETE'}>
-                                <input type="submit" value="Delete"/>
+                                <button type="submit" class="btn btn-outline-light" style={{ backgroundColor: '#ddb3b3', color: 'white' }}>Delete</button>
                             </form>
 
 

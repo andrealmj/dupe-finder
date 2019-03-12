@@ -38,11 +38,28 @@ class EditMatches extends React.Component {
                     </div>
 
                 <p className="font-weight-normal" style={{fontSize: '24px'}}>Edit product/dupe relationship:</p>
-                <form method='POST' action={'/dupes/' + result.rs_id + "/put?_method=PUT"}>
-                    Product ID: <input type='text' name='pdtId' placeholder='product ID' defaultValue={result.product_id}/><br />
-                    Dupe ID: <input type='text' name='dupeId' placeholder='dupe ID' defaultValue={result.dupe_id}/><br />
-                    Similarity: <input type='text' name='similarity' placeholder='similarity' defaultValue={result.similarity}/>%
-                    <input type='submit' value='Submit'/>
+                
+                <form method='POST' action={'/dupes/' + result.rs_id + "/put?_method=PUT"} className="pb-4">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="pdtID">Product ID</label>                            
+                            <input name="pdtId" type="text" class="form-control" id="pdtID" defaultValue={result.product_id} style={{width: '30%'}} />           
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="dupeID">Dupe ID</label>                            
+                            <input name="dupeId" type="text" class="form-control" id="dupeID" defaultValue={result.dupe_id} style={{width: '30%'}} />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="similarity">Similarity (%)</label>
+                            <input name="similarity" type="text" class="form-control" id="similarity" defaultValue={result.similarity} style={{width: '30%'}} />
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn" style={{ backgroundColor: '#ddb3b3', color: 'white' }}>Edit</button>
                 </form>
 
                 </div>

@@ -9,32 +9,60 @@ class SubmitDupeAsAdmin extends React.Component {
 
             <AdminLayout>
 
-                <h2>Submit a dupe:</h2><br />
+<p className="font-weight-normal" style={{fontSize: "24px"}}>Submit a dupe:</p><hr />
 
-                <form method="POST" action="" autoComplete="on">
+<form method="POST" action="" autoComplete="on" className="pb-4">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <p className="font-weight-normal" style={{ fontSize: '20px' }}>Dupe information<br /></p>
 
-                    <div className="submitted-dupe-info">
-                        <h3>Dupe info:</h3>
-                        Dupe's shade name: <input name="submittedDupeShadeName" type="text" placeholder="..." style={{width: '50%'}}/><br />
-                        Dupe's brand: <input name="submittedDupeBrand" type="text" placeholder="KIKO, Colourpop, ..." style={{width: '50%'}}/><br />
-                        Dupe's product type: <input name="submittedDupeType" type="text" placeholder="Soft Touch Blush, Ultra Matte Liquid Lipstick, ..." style={{width: '50%'}}/><br />
-                        Dupe's price: $<input name="submittedDupePrice" type="text" style={{width: '50%'}}/>
-                    </div><br />
+            <label for="dupeShadeName">Dupe's Shade Name</label>                            
+            <input name="submittedDupeShadeName" type="text" class="form-control" id="dupeShadeName" placeholder="..." style={{width: '60%'}} />
+            <small id="help" class="form-text text-muted">This should be the less expensive item.</small>
+            <br />
 
-                    <div className="submitted-product-info">
-                        <h3>Is a dupe of...</h3>
-                        Product's shade name: <input name="submittedPdtShadeName" type="text" placeholder="..." style={{width: '50%'}}/><br />
-                        Product's brand: <input name="submittedPdtBrand" type="text" placeholder="Tom Ford Beauty, NARS, ..." style={{width: '50%'}}/><br />
-                        Product type: <input name="submittedPdtType" type="text" placeholder="The Ultimate Bronzer, Powder Blush, ..." style={{width: '50%'}}/><br />
-                        Product's price: $<input name="submittedPdtPrice" type="text" style={{width: '50%'}}/>
-                    </div><br />
+            <label for="dupeBrand">Dupe's Brand</label>                            
+            <input name="submittedDupeBrand" type="text" class="form-control" id="dupeBrand" placeholder="KIKO, Colourpop, ..." style={{width: '60%'}} />
+            <br />
 
-                    How similar is the dupe to the original product? <input name="similarity" type="text" />%
+            <label for="dupeType">Dupe's Product Type</label>                            
+            <input name="submittedDupeType" type="text" class="form-control" id="dupeType" placeholder="Soft Touch Blush, Ultra Matte Liquid Lipstick, ..." style={{width: '60%'}} />
+            <br />
 
-                    <br />
-                    <input name="submit" type="submit" />
+            <label for="dupePrice">Dupe's Price ($)</label>                            
+            <input name="submittedDupePrice" type="text" class="form-control" id="dupePrice" style={{width: '60%'}} />
+            
+        </div>
 
-                </form>
+        <div class="form-group col-md-6">
+            <p className="font-weight-normal" style={{ fontSize: '20px' }}>Product information</p>
+
+            <label for="pdtShadeName">Product's Shade Name</label>
+            <input name="submittedPdtShadeName" type="text" class="form-control" id="pdtShadeName" placeholder="..." style={{width: '60%'}} />
+            <small id="help" class="form-text text-muted">This should be the more expensive item.</small>
+            <br />
+            
+            <label for="pdtBrand">Product's Brand</label>                            
+            <input name="submittedPdtBrand" type="text" class="form-control" id="pdtBrand" placeholder="Tom Ford Beauty, NARS, ..." style={{width: '60%'}} />
+            <br />
+
+            <label for="pdtType">Product's Type</label>                            
+            <input name="submittedPdtType" type="text" class="form-control" id="pdtType" placeholder="The Ultimate Bronzer, Powder Blush, ..." style={{width: '60%'}} />
+            <br />
+
+            <label for="pdtPrice">Product's Price ($)</label>                            
+            <input name="submittedPdtPrice" type="text" class="form-control" id="pdtPrice" style={{width: '60%'}} />
+            
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="similarity">How similar (%) is the dupe to the original product?</label>
+            <input name="similarity" type="text" class="form-control" id="similarity" style={{width: '50%'}} />
+        </div>
+    </div>
+
+    <button type="submit" class="btn" style={{ backgroundColor: '#ddb3b3', color: 'white' }}>Submit Dupe</button>
+</form>
 
             </AdminLayout>
 

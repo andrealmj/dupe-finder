@@ -16,6 +16,10 @@ class SubmitDupeLoggedIn extends React.Component {
                         <div class="form-group col-md-6">
                             <p className="font-weight-normal" style={{ fontSize: '20px' }}>Dupe information<br /></p>
 
+                            <label for="dupeImg">Select Dupe Image</label><br />
+                            <input id="dupeImg" type="file" />
+                            <br /><br />
+
                             <label for="dupeShadeName">Dupe's Shade Name</label>                            
                             <input name="submittedDupeShadeName" type="text" class="form-control" id="dupeShadeName" placeholder="..." style={{width: '60%'}} />
                             <small id="help" class="form-text text-muted">This should be the less expensive item.</small>
@@ -37,6 +41,10 @@ class SubmitDupeLoggedIn extends React.Component {
                         <div class="form-group col-md-6">
                             <p className="font-weight-normal" style={{ fontSize: '20px' }}>Product information</p>
 
+                            <label for="pdtImg">Select Product Image</label><br />
+                            <input id="pdtImg" type="file" />
+                            <br /><br />
+                            
                             <label for="pdtShadeName">Product's Shade Name</label>
                             <input name="submittedPdtShadeName" type="text" class="form-control" id="pdtShadeName" placeholder="..." style={{width: '60%'}} />
                             <small id="help" class="form-text text-muted">This should be the more expensive item.</small>

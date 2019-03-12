@@ -3,6 +3,10 @@ const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const pg = require('pg');
 const sha256 = require('js-sha256');
+const axios = require('axios');
+
+const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/andrea-mj-lim';
+const CLOUDINARY_UPLOAD_PRESET = 'ddoudxwj';
 
 const SALT = "better than temptalia";
 

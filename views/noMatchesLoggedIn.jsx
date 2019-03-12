@@ -8,7 +8,8 @@ class NoMatchesLoggedIn extends React.Component {
         const productDetails = this.props.product_details.map ( detail => {
             return (
 
-                <div>
+                <div className="font-weight-normal">
+                    <img src={detail.product_swatch_link} style={{maxHeight: '180px'}}/><br />
                     <b>Product Brand</b>: {detail.brand}<br />
                     <b>Product Shade Name</b>: {detail.shade_name}<br />
                     <b>Product Type</b>: {detail.type}<br />
@@ -21,10 +22,10 @@ class NoMatchesLoggedIn extends React.Component {
 
         return (
                     <LoggedInLayout username={this.props.username}>
-                    <div>
-                        <h2>Sorry, a dupe for '{this.props.product_shade_name}' does not exist in our database.</h2>
+                    <div className="pb-4">
+                        <p className="font-weight-normal" style={{fontSize: "24px"}}>Sorry, a dupe for '{this.props.product_shade_name}' does not exist in our database.</p>
                         <ul>{productDetails}</ul>
-                        <p>Would you like to <a href="/dupes/new">submit a new dupe</a>?</p>
+                        <p>Would you like to <a href="/dupes/new" style={{color: '#ddb3b3'}}>submit a new dupe</a>?</p>
                     </div>
                     </LoggedInLayout>
             )

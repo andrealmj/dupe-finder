@@ -7,7 +7,7 @@ class NoMatches extends React.Component {
         const productDetails = this.props.product_details.map ( detail => {
             return (
 
-                <div class="font-weight-normal">
+                <div className="font-weight-normal">
                     <img src={detail.product_swatch_link} style={{maxHeight: '180px'}}/><br />
                     <b>Product Brand</b>: {detail.brand}<br />
                     <b>Product Shade Name</b>: {detail.shade_name}<br />
